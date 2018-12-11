@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Weather of the cities</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 <style type="text/css">
@@ -43,9 +44,16 @@ table {
 
 margin-top:20px;
 margin:auto;
-width:300px;
+width:450px;
 table-layout: fixed;
 margin-top:35px;
+border-collapse: collapse;
+
+}
+
+td {
+
+border:1px solid black;
 
 }
 
@@ -71,22 +79,54 @@ background:black;
 <div id="centerBox">
 	<form>
 
-	<input type="text" placeholder="Name of city">
-	<input type="number" placeholder="Number of Country">
-	<input type="button" value="Send">
+	<input type="text" placeholder="Name of city" id="city">
+	<input type="text" placeholder="Country" id="country">
+	<input type="button" onclick="getWeather()" value="Send">
 	
 	</form>
 
-	<table border="1">
+	<table>
 	
 	<tr>
-	<td>dada</td>
-	<td>dada</td>	
+	<td>Temperature</td>
+	<td><div id="temp"></div></td>	
 	</tr>
 
 	</table>
 
 </div>
+
+<script>
+
+
+	function getWeather()
+	{
+
+	let city = document.getElementById('city').value;
+	let country = document.getElementById('country').value;
+	/*console.log(city);
+	console.log(country);*/
+	let appid="91d6e79307bb2126fb26e2d4f5e21bf7";
+	let req="http://api.openweathermap.org/data/2.5/forecast?";
+	req = req + 'q=' + city;
+	req = req + ',' + country;
+	req = req + '&mode=HTML';
+	req = req + '&appid=' +appid;
+	console.log(req);
+
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+       // Typical action to be performed when the document is ready:
+       document.getElementById("temp").innerHTML = xhttp.responseText;
+    	}
+	};
+	xhttp.open("GET", req , true);
+	xhttp.send();
+
+	}
+
+</script>
 
 
 </body>
