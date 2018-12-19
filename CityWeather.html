@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Weather of the cities</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
@@ -18,41 +19,29 @@ height: 100%;
 }
 
 
+@font-face {
+  font-family: Font1;
+  src:url(Montserrat-Bold.ttf);
+}
+
+@font-face {
+  font-family: Font2;
+  src:url(Montserrat-Regular.ttf);
+}
+
 input {
 
 padding:10px;
 
 }
 
-table {
+form  {
 
-margin-top:20px;
-margin:auto;
-width:450px;
-table-layout: fixed;
-margin-top:35px;
-border-collapse: collapse;
-
-}
-
-input[type="button"] {
-
-border:0;
-text-decoration:none;
-background:#999;
-color:white;
-font-weight:bold;
-
-}
-
-input[type="button"]:hover {
-
-background:black;
-
-}
-
-input[type="text"] {
-
+background:green;
+display: table-cell;
+text-align: center;
+vertical-align: middle;
+	
 }
 
 
@@ -60,6 +49,34 @@ input {
 
 display:block;
 margin:auto;
+
+}
+
+input[type="text"] {
+	
+width:300px;
+padding:20px;
+border: 1px solid #ccc;
+text-decoration:none;
+outline:none;
+border-radius:10px;
+margin-bottom:15px;
+
+}
+
+input[type=button] {
+	
+width:100px;
+color:white;
+padding:20px;
+border:none;
+outline:none;
+border-radius:10px;
+cursor: pointer;
+
+}
+
+input[type=button]:hover {
 
 }
 
@@ -74,15 +91,16 @@ background:red;
 
 #boxUp {
 
-height:20%;
+height:25%;
 width:100%;
 background:blue;
+display: table;
 	
 }
 
 #boxDown {
 	
-height:80%;
+height:75%;
 width:100%;
 background:green;
 	
@@ -92,7 +110,7 @@ background:green;
 	
 width:20%;
 height:100%;
-background:rgba(255,255,255,1);
+/*background:rgba(255,255,255,1);*/
 float:left;
 
 }
@@ -101,7 +119,7 @@ float:left;
 	
 width:20%;
 height:100%;
-background:rgba(204,204,204,1);
+/*background:rgba(204,204,204,1);*/
 float:left;
 
 }
@@ -110,7 +128,7 @@ float:left;
 	
 width:20%;
 height:100%;
-background:rgba(153,153,153,1);
+/*background:rgba(153,153,153,1);*/
 float:left;
 
 }
@@ -119,7 +137,7 @@ float:left;
 	
 width:20%;
 height:100%;
-background:rgba(102,102,102,1);
+/*background:rgba(102,102,102,1);*/
 float:left;
 
 }
@@ -129,22 +147,22 @@ float:left;
 	
 width:20%;
 height:100%;
-background:rgba(51,51,51,1);
+/*background:rgba(51,51,51,1);*/
 float:left;
 
 }
 
-#half1 {
+.half1 {
 	
 background:rgba(153,51,0,1);
-height:50%;
+height:70%;
 
 }
 
-#half2 {
+.half2 {
 	
 background:rgba(153,0,0,1);
-height:50%;
+height:30%;
 
 }
 
@@ -154,11 +172,98 @@ text-align:center
 
 }
 
+.textWrap {
+
+width:100%;
+height:20%;
+margin:auto;
+background:red;
+text-align:center;	
+font-size:25px;
+text-align: center;
+
+}
+
+.textContent {
+	
+position: relative;
+float: left;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+font-family:Font1;
+	
+}
+
+.textContent2 {
+	
+position: relative;
+float: left;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+font-family:Font2;
+font-size:60px;
+	
+}
+
+
+.pictureWrap {
+	
+width:100%;
+height:80%;
+margin:auto;	
+background:url(sample.png)  center / contain no-repeat;
+
+	
+}
+
+img {
+	
+width:100%;
+height:100%;
+	
+}
+
+@media screen and (max-width: 900px) {
+	
+body,html {
+
+margin:0;
+overflow: scroll;
+width: 100%;
+height: 100%; 
+
+}	
+	
+.weather1,.weather2,.weather3,.weather4,.weather5 {
+	
+display:block;
+width:100%;
+
+}
+
+
+.textContent2 {
+	
+position: relative;
+float: left;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+font-family:Font2;
+font-size:100px;
+	
+}
+
+}
+
 </style>
 
 	<div id="main">
 	
     	<div id="boxUp">
+        
             <form>
             
             <input type="text" placeholder="Name of city" id="city">
@@ -166,37 +271,76 @@ text-align:center
             <input type="button" onclick="getWeather()" value="Send">
             
             </form>
+            
     	</div>
         
         <div id="boxDown">
         
         	<div class="weather1">
-            	<div id="half1"></div>
-                <div id="half2"><div id="temp"></div></div>
+            	<div class="half1">
+                	<div class="textWrap">
+                    	<div class="textContent">Temperature</div>
+                    </div>
+                  <div class="pictureWrap"></div>
+                </div>
+                <div class="half2">
+                	<div class="textContent2">
+                    	<div id="temp"></div>
+                    </div>
+                </div>
             </div>
             
             <div class="weather2">
-            	<div id="half1"></div>
-                <div id="half2"><div id="tempmax"></div></div>
+            	<div class="half1">
+                	<div class="textWrap">
+                    <div class="textContent">Max Temperature</div>
+                    </div>
+                </div>
+                <div class="half2">
+                	<div class="textContent2">
+                		<div id="tempmax"></div>
+                    </div>
+                </div>
             </div>
             
             <div class="weather3">
-            	<div id="half1"></div>
-                <div id="half2"><div id="pressure"></div></div>
+            	<div class="half1">
+                	<div class="textWrap">
+                    <div class="textContent">Pressure</div>
+                    </div>
+                </div>
+                <div class="half2">
+                    <div class="textContent2">
+                        <div id="pressure"></div>
+                    </div>
+                </div>
             </div>
             
             <div class="weather4">
-            	<div id="half1"></div>
-                <div id="half2"><div id="humidity"></div></div>
+            	<div class="half1">
+                	<div class="textWrap">
+                    <div class="textContent">Humidity</div>
+                    </div>
+                </div>
+                <div class="half2">
+                	<div class="textContent2">
+                		<div id="humidity"></div>
+               	 	</div>
+                </div>
             </div>
             
             <div class="weather5">
-           		<div id="half1"></div>
-                <div id="half2"><div id="wind"></div>
-            </div>
-        
-        </div>
-        
+           		<div class="half1">
+                	<div class="textWrap">
+                    <div class="textContent">Wind</div>
+                    </div>
+                </div>
+                <div class="half2">
+                	<div class="textContent2">
+               	    	<div id="wind"></div>
+               	 	</div>
+               </div>
+        </div>  
 	</div>
 
 <script>
@@ -207,7 +351,6 @@ text-align:center
 	let city = document.getElementById('city').value;
 	city = encodeURIComponent(city);
 	let country = document.getElementById('country').value;
-	city = encodeURIComponent(city);
 	/*console.log(city);
 	console.log(country);*/
 	let appid="91d6e79307bb2126fb26e2d4f5e21bf7";
@@ -221,8 +364,7 @@ text-align:center
 	let xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-<<<<<<< HEAD
-       // Typical action to be performed when the document is ready:
+
        let obj = JSON.parse(this.responseText);
        document.getElementById("temp").innerHTML = Math.round((obj.main.temp-273.15)*100)/100;
 
@@ -233,11 +375,7 @@ text-align:center
        document.getElementById("humidity").innerHTML = obj.main.humidity;
 
        document.getElementById("wind").innerHTML = obj.wind.speed;
-=======
-       let obj=JSON.parse(this.responseText);
-       document.getElementById("temp").innerHTML = 
-       Math.round((obj.list[0].main.temp-273.15)*100)/100;
->>>>>>> f917299abc1a4813b364eb9c87e843fd5e0237ee
+
        }
 	};
 	xhttp.open("GET", req , true);
