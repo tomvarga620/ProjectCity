@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Weather of the cities</title>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Weather of the cities</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
@@ -32,12 +33,13 @@ height: 100%;
 input {
 
 padding:10px;
+background:#282828;
 
 }
 
 form  {
 
-background:green;
+background:#191919;
 display: table-cell;
 text-align: center;
 vertical-align: middle;
@@ -56,12 +58,21 @@ input[type="text"] {
 	
 width:300px;
 padding:20px;
-border: 1px solid #ccc;
 text-decoration:none;
+border:none;
 outline:none;
 border-radius:10px;
 margin-bottom:15px;
+color:white;
+font-family:Font1;
+transition:1s;
 
+}
+
+input[type="text"]:hover {
+
+background:#333333;	
+	
 }
 
 input[type=button] {
@@ -73,11 +84,32 @@ border:none;
 outline:none;
 border-radius:10px;
 cursor: pointer;
+background:#41B568;
+font-weight:bold;
+transition: 1s;
+font-size:17px;
 
 }
 
 input[type=button]:hover {
+background:#33994D;
 
+}
+
+::placeholder {
+  color: #494949;
+  opacity: 1; /* Firefox */
+  transition:1s;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+ color: #494949;
+ transition:1s;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+ color: #494949;
+ transition:1s;
 }
 
 #main {
@@ -85,7 +117,6 @@ input[type=button]:hover {
 width:100%;
 height:100%;
 margin:auto;
-background:red;	
 		
 }
 
@@ -93,7 +124,6 @@ background:red;
 
 height:25%;
 width:100%;
-background:blue;
 display: table;
 	
 }
@@ -102,7 +132,6 @@ display: table;
 	
 height:75%;
 width:100%;
-background:green;
 	
 }
 
@@ -152,18 +181,40 @@ float:left;
 
 }
 
+/*
+.weather1:hover,.weather2:hover,.weather3:hover,.weather4:hover,.weather5:hover {
+
+-ms-transform: scale(1.05); 
+  -webkit-transform: scale(1.05); 
+  transform: scale(1.05); 	
+	
+}*/
+
+
+
 .half1 {
 	
-background:rgba(153,51,0,1);
+background:#1E1E1E;
 height:70%;
+transition:2s;
 
 }
 
 .half2 {
 	
-background:rgba(153,0,0,1);
+background:#1C1C1C;
 height:30%;
+color:white;
+transition:2s;
 
+}
+
+.half1:hover {
+	
+-ms-transform: scale(1.1); 
+  -webkit-transform: scale(1.1); 
+  transform: scale(1.1); 		
+	
 }
 
 #temp,#tempmax,#pressure,#humidity,#wind {
@@ -177,7 +228,7 @@ text-align:center
 width:100%;
 height:20%;
 margin:auto;
-background:red;
+background:#1C1C1C;
 text-align:center;	
 font-size:25px;
 text-align: center;
@@ -192,6 +243,7 @@ top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
 font-family:Font1;
+color:rgba(255, 255, 255, 0.5);
 	
 }
 
@@ -208,15 +260,51 @@ font-size:60px;
 }
 
 
-.pictureWrap {
+.pictureWrap1 {
 	
 width:100%;
 height:80%;
 margin:auto;	
-background:url(sample.png)  center / contain no-repeat;
-
+background:url(w1.png)  center / contain no-repeat;
 	
 }
+
+.pictureWrap2 {
+	
+width:100%;
+height:80%;
+margin:auto;	
+background:url(w2.png)  center / contain no-repeat;
+	
+}
+
+.pictureWrap3 {
+	
+width:100%;
+height:80%;
+margin:auto;	
+background:url(w3.png)  center / contain no-repeat;
+	
+}
+
+.pictureWrap4 {
+	
+width:100%;
+height:80%;
+margin:auto;	
+background:url(w4.png)  center / contain no-repeat;
+	
+}
+
+.pictureWrap5 {
+	
+width:100%;
+height:80%;
+margin:auto;	
+background:url(w5.png)  center / contain no-repeat;
+	
+}
+
 
 img {
 	
@@ -225,7 +313,7 @@ height:100%;
 	
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 950px) {
 	
 body,html {
 
@@ -258,6 +346,7 @@ font-size:100px;
 
 }
 
+
 </style>
 
 	<div id="main">
@@ -281,7 +370,7 @@ font-size:100px;
                 	<div class="textWrap">
                     	<div class="textContent">Temperature</div>
                     </div>
-                  <div class="pictureWrap"></div>
+                  <div class="pictureWrap1"></div>
                 </div>
                 <div class="half2">
                 	<div class="textContent2">
@@ -295,6 +384,7 @@ font-size:100px;
                 	<div class="textWrap">
                     <div class="textContent">Max Temperature</div>
                     </div>
+                  <div class="pictureWrap2"></div>
                 </div>
                 <div class="half2">
                 	<div class="textContent2">
@@ -308,6 +398,7 @@ font-size:100px;
                 	<div class="textWrap">
                     <div class="textContent">Pressure</div>
                     </div>
+                  <div class="pictureWrap3"></div>
                 </div>
                 <div class="half2">
                     <div class="textContent2">
@@ -321,6 +412,7 @@ font-size:100px;
                 	<div class="textWrap">
                     <div class="textContent">Humidity</div>
                     </div>
+                  <div class="pictureWrap4"></div>
                 </div>
                 <div class="half2">
                 	<div class="textContent2">
@@ -334,6 +426,7 @@ font-size:100px;
                 	<div class="textWrap">
                     <div class="textContent">Wind</div>
                     </div>
+                  <div class="pictureWrap5"></div>
                 </div>
                 <div class="half2">
                 	<div class="textContent2">
@@ -351,8 +444,8 @@ font-size:100px;
 	let city = document.getElementById('city').value;
 	city = encodeURIComponent(city);
 	let country = document.getElementById('country').value;
-	/*console.log(city);
-	console.log(country);*/
+	console.log(city);
+	console.log(country);
 	let appid="91d6e79307bb2126fb26e2d4f5e21bf7";
 	let req="http://api.openweathermap.org/data/2.5/weather?";
 	req = req + 'q=' + city;
@@ -366,16 +459,20 @@ font-size:100px;
     if (this.readyState == 4 && this.status == 200) {
 
        let obj = JSON.parse(this.responseText);
-       document.getElementById("temp").innerHTML = Math.round((obj.main.temp-273.15)*100)/100;
+       document.getElementById("temp").innerHTML = Math.round((obj.main.temp-273.15)*100)/100 +" °C";
 
-       document.getElementById("tempmax").innerHTML = obj.main.temp_max;
+       document.getElementById("tempmax").innerHTML = Math.round((obj.main.temp_max-273.15)*100)/100 +" °C";
 
-       document.getElementById("pressure").innerHTML = obj.main.pressure;
+       document.getElementById("pressure").innerHTML = obj.main.pressure +" hpa";
 
-       document.getElementById("humidity").innerHTML = obj.main.humidity;
+       document.getElementById("humidity").innerHTML = obj.main.humidity + " %";
 
-       document.getElementById("wind").innerHTML = obj.wind.speed;
-
+       document.getElementById("wind").innerHTML = obj.wind.speed +" km/h";
+	   
+	  /* document.getElementById("").innerHTML = city;
+	   
+	   document.getElementById("").innerHTML = country;*/
+	   
        }
 	};
 	xhttp.open("GET", req , true);
