@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weather of the cities</title>
+<link rel="stylesheet" href="style.css" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+
+	<div id="main">
+	
+    	<div id="boxUp">
+        
+        	<div id="boxLeft">
+            
+            	<div id="leftHalf1">
+        			
+                    <form>
+                         <input type="text" name="namecity" placeholder="Name of city" id="city">
+                         <input type="text" name="namecountry" placeholder="Country" id="country">
+                         <input type="button" onclick="getWeather()" value="Send">
+                    </form>
+                </div>
+                
+                <div id="leftHalf2">
+                
+                	<div id="locationIcon"></div>
+                    
+                    <div id="locationText">
+                    
+						<div id="textWrap">
+                            <div id="textCenter">
+                                <span id="cityTitle"></span>
+                                <br>
+                                <span id="countryTitle"></span>
+                            </div>
+                        </div>
+                    
+                    </div>
+       
+                </div>
+            
+            </div>
+            
+            <div id="boxRight">
+            
+            	<div id="rightHalf1"></div>
+            	<div id="rightHalf2"></div>
+                
+            </div>
+            
+    	</div>
+        
+        <div id="boxDown">
+        
+        	<div class="weather1">
+            	<div class="half1">
+                	<div class="textWrap">
+                    	<div class="textContent">Temperature</div>
+                    </div>
+                  <div class="pictureWrap1"></div>
+                </div>
+                <div class="half2">
+                	<div class="textContent2">
+                    	<div id="temp"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="weather2">
+            	<div class="half1">
+                	<div class="textWrap">
+                    <div class="textContent">Clouds</div>
+                    </div>
+                  <div class="pictureWrap2"></div>
+                </div>
+                <div class="half2">
+                	<div class="textContent2">
+                		<div id="clouds"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="weather3">
+            	<div class="half1">
+                	<div class="textWrap">
+                    <div class="textContent">Pressure</div>
+                    </div>
+                  <div class="pictureWrap3"></div>
+                </div>
+                <div class="half2">
+                    <div class="textContent2">
+                        <div id="pressure"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="weather4">
+            	<div class="half1">
+                	<div class="textWrap">
+                    <div class="textContent">Humidity</div>
+                    </div>
+                  <div class="pictureWrap4"></div>
+                </div>
+                <div class="half2">
+                	<div class="textContent2">
+                		<div id="humidity"></div>
+               	 	</div>
+                </div>
+            </div>
+            
+            <div class="weather5">
+           		<div class="half1">
+                	<div class="textWrap">
+                    <div class="textContent">Wind</div>
+                    </div>
+                  <div class="pictureWrap5"></div>
+                </div>
+                <div class="half2">
+                	<div class="textContent2">
+               	    	<div id="wind"></div>
+               	 	</div>
+               </div>
+        </div>  
+	</div>
+
+<script>
+
+	function getWeather()
+	{
+		
+	let name1=document.getElementsByName("namecity")[0].value;
+ 	let name2=document.getElementsByName("namecountry")[0].value;
+
+  	if( name1== "" || name2 === "" || name1== " " || name2== " "){
+  	alert("The form is incomplete");
+        return false;
+  	}
+
+	let city = document.getElementById('city').value;
+	city = encodeURIComponent(city);
+	let country = document.getElementById('country').value;
+	console.log(city);
+	console.log(country);
+	let appid="91d6e79307bb2126fb26e2d4f5e21bf7";
+	let req="http://api.openweathermap.org/data/2.5/weather?";
+	req = req + 'q=' + city;
+	req = req + ',' + country;
+	req = req + '&mode=HTML';
+	req = req + '&appid=' +appid;
+	console.log(req);
+
+	let xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+	   document.getElementById('rightHalf1').style.backgroundImage="url(empty.png)";
+       let obj = JSON.parse(this.responseText);
+	   
+       document.getElementById("temp").innerHTML = Math.round((obj.main.temp-273.15)*100)/100 +" °C";
+
+       document.getElementById("clouds").innerHTML = obj.clouds.all +" %";
+
+       document.getElementById("pressure").innerHTML = obj.main.pressure +" hpa";
+
+       document.getElementById("humidity").innerHTML = obj.main.humidity + " %";
+
+       document.getElementById("wind").innerHTML = obj.wind.speed +" km/h";
+	   
+	   document.getElementById('locationIcon').style.backgroundImage="url(location.png)"; 
+	   
+	   document.getElementById("cityTitle").innerHTML = obj.name;
+	   
+	   document.getElementById("countryTitle").innerHTML = obj.sys.country;
+	   
+	  if(obj.weather[0].main === "Clouds"){   
+		document.getElementById('rightHalf1').style.backgroundImage="url(main1.png)";  
+		}
+		else
+		{
+			if(obj.weather[0].main === "Clear"){   
+			document.getElementById('rightHalf1').style.backgroundImage="url(main2.png)";
+			}
+			else
+			{
+				if(obj.weather[0].main === "Rain"){   
+				document.getElementById('rightHalf1').style.backgroundImage="url(main3.png)";  
+				}	
+				else
+				{
+					if(obj.weather[0].main === "Mist"){   
+					document.getElementById('rightHalf1').style.backgroundImage="url(main4.png)";  
+					}
+					else
+					{
+						if(obj.weather[0].main === "Snow"){   
+						document.getElementById('rightHalf1').style.backgroundImage="url(main5.png)";  
+						}
+					}
+				}
+			}
+		
+		}
+	   	
+	  
+	  /* if(obj.weather[0].main = "Clouds"){   
+		document.getElementById('rightHalf1').style.backgroundImage="url(main1.png)";  
+		}
+		
+		if(obj.weather[0].main = "Clear"){   
+		document.getElementById('rightHalf1').style.backgroundImage="url(main2.png)";  
+		}
+		
+		if(obj.weather[0].main = "Rain"){   
+		document.getElementById('rightHalf1').style.backgroundImage="url(main3.png)";  
+		}
+		
+		if(obj.weather[0].main = "Mist"){   
+		document.getElementById('rightHalf1').style.backgroundImage="url(main4.png)";  
+		}
+		
+		if(obj.weather[0].main = "Snow"){   
+		document.getElementById('rightHalf1').style.backgroundImage="url(main5.png)";  
+		}*/
+	  	
+
+	   }
+	};
+	xhttp.open("GET", req , true);
+	xhttp.send();
+
+	}
+</script>
+
+
+</body>
+</html>
